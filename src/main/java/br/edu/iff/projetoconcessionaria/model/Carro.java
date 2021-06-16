@@ -1,7 +1,9 @@
 
 package br.edu.iff.projetoconcessionaria.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -9,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Carro implements Serializable {
@@ -34,7 +37,9 @@ public class Carro implements Serializable {
      @Column(length = 4, nullable = false)
      private int ano;
      
-     private List<Reserva> reservas;
+     @ManyToMany(mappedBy = "carros")
+     @JsonBackReference
+     private List<Reserva> reservas = new ArrayList<>();
 
     public Long getId() {
         return id;

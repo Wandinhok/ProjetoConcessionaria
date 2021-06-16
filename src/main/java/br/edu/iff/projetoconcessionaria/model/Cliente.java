@@ -1,10 +1,13 @@
 
 package br.edu.iff.projetoconcessionaria.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente extends Pessoa {
@@ -15,7 +18,9 @@ public class Cliente extends Pessoa {
     @Column(nullable = false, length = 2)
     private String habilitacao;
     
-    private List<Reserva> reservas;
+    @JsonBackReference
+    @OneToMany(mappedBy = "cliente")
+    private List<Reserva> reservas = new ArrayList<>();
 
     public String getDocumentos() {
         return documentos;
