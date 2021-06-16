@@ -2,11 +2,15 @@
 package br.edu.iff.projetoconcessionaria.model;
 
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-
-public class Funcionario {
+@Entity
+public class Funcionario extends Pessoa {
     
+    @Column(nullable = false, length = 50)
     private String funcao;
+    @Column(nullable = false)
     private String senha;
     
     private List<Reserva> reservas;

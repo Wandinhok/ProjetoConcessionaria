@@ -3,12 +3,16 @@ package br.edu.iff.projetoconcessionaria.model;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-
+@Entity
 public class Cliente extends Pessoa {
-    
-    private String documentos;  
+    @Column(length = 200)
+    private String documentos; 
+    @Column(nullable = false, length = 10)
     private Date dt_nascimento;
+    @Column(nullable = false, length = 2)
     private String habilitacao;
     
     private List<Reserva> reservas;

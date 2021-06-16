@@ -4,19 +4,34 @@ package br.edu.iff.projetoconcessionaria.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Carro implements Serializable {
     
      private static final long serialVersionUID = 1L;
-     
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
+     @Column(length = 7, nullable = false, unique = true)
      private String placa;
+     @Column(length = 17, nullable = false, unique = true)
      private String chassi;
+     @Column(length = 11, nullable = false, unique = true)
      private String renavam;
+     @Column(length = 7, nullable = false)
      private String km;
+     @Column(length = 25, nullable = false)
      private String modelo;
+     @Column(length = 15, nullable = false)
      private String cor;
-     private String combustivel;
+     @Column(length = 17, nullable = false)
+     private TipoCombustivelEnum tipo;
+     @Column(length = 4, nullable = false)
      private int ano;
      
      private List<Reserva> reservas;
@@ -77,14 +92,6 @@ public class Carro implements Serializable {
         this.cor = cor;
     }
 
-    public String getCombustivel() {
-        return combustivel;
-    }
-
-    public void setCombustivel(String combustivel) {
-        this.combustivel = combustivel;
-    }
-
     public int getAno() {
         return ano;
     }
@@ -100,20 +107,11 @@ public class Carro implements Serializable {
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
-    
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.placa);
-        hash = 53 * hash + Objects.hashCode(this.chassi);
-        hash = 53 * hash + Objects.hashCode(this.renavam);
-        hash = 53 * hash + Objects.hashCode(this.km);
-        hash = 53 * hash + Objects.hashCode(this.modelo);
-        hash = 53 * hash + Objects.hashCode(this.cor);
-        hash = 53 * hash + Objects.hashCode(this.combustivel);
-        hash = 53 * hash + this.ano;
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -129,35 +127,16 @@ public class Carro implements Serializable {
             return false;
         }
         final Carro other = (Carro) obj;
-        if (this.ano != other.ano) {
-            return false;
-        }
-        if (!Objects.equals(this.placa, other.placa)) {
-            return false;
-        }
-        if (!Objects.equals(this.chassi, other.chassi)) {
-            return false;
-        }
-        if (!Objects.equals(this.renavam, other.renavam)) {
-            return false;
-        }
-        if (!Objects.equals(this.km, other.km)) {
-            return false;
-        }
-        if (!Objects.equals(this.modelo, other.modelo)) {
-            return false;
-        }
-        if (!Objects.equals(this.cor, other.cor)) {
-            return false;
-        }
-        if (!Objects.equals(this.combustivel, other.combustivel)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-     
+
+   
+    
+
+
+   
     
 }

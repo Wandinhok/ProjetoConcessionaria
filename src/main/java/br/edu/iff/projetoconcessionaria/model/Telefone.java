@@ -3,12 +3,15 @@ package br.edu.iff.projetoconcessionaria.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 
+@Entity
 public class Telefone implements Serializable {
     
      private static final long serialVersionUID = 1L;
-     
+     @Column(length = 14, nullable = false)
      private String numero;
 
     public String getNumero() {
