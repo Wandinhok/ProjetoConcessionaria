@@ -2,6 +2,7 @@
 package br.edu.iff.projetoconcessionaria.model;
 
 
+import br.edu.iff.projetoconcessionaria.annotation.EmailValidation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public abstract class Pessoa implements Serializable {
    private String nome;
    @Column(nullable = false, length = 100, unique = true, updatable = false)
    @NotBlank(message = "Email obrigatório.")
-   @Email
+   @EmailValidation(message = "Email inválido.")
    private String email;
    @Column(length = 14, nullable = false, unique = true)
    @CPF(message = "CPF inválido.")
