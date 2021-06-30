@@ -1,24 +1,31 @@
 
 package br.edu.iff.projetoconcessionaria.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Cliente extends Pessoa {
     @Column(length = 200)
+    @Length(max = 200, message = "Documentos devem ter no máximo 200 caracteres.")
     private String documentos; 
     @Column(nullable = false, length = 10)
+    @NotBlank(message="Data de nascimento obrigatória.")
     private Date dt_nascimento;
     @Column(nullable = false, length = 2)
+    @NotBlank(message="Habilitação obrigatória.")
+    @Length(max = 2, message = "Habilitaçãp deve ter no máximo 2 caracteres")
     private String habilitacao;
     
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Reserva> reservas = new ArrayList<>();
 

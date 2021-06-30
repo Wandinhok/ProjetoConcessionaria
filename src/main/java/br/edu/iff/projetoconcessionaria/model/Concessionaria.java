@@ -16,6 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 public class Concessionaria implements Serializable {
@@ -25,16 +31,23 @@ public class Concessionaria implements Serializable {
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
      @Column(nullable = false, length = 100)
+     @NotBlank(message="Nome obrigatório.")
+     @Length(max = 50, message = "Nome deve ter no máximo 50 caracteres")
      private String nome;
      @Column(length = 18, nullable = false, unique = true, updatable = false)
+     @CNPJ(message = "CNPJ inválido")
      private String cnpj;
      
      @Embedded
+     @NotNull(message = "Endereco obrigatório")
      private Endereco endereco;
      @ElementCollection(fetch = FetchType.EAGER)
+     @Valid
      private List<Telefone> telefones;
      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
      @JoinColumn(nullable = false, name = "concessionaria_id")
+     @Size(min = 1, message = "Hotel deve ter no mínimo 1 quarto.")
+     @Valid
      private List<Carro> carros = new ArrayList<>();
      
      

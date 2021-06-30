@@ -1,7 +1,7 @@
 
 package br.edu.iff.projetoconcessionaria.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +17,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Reserva implements Serializable{
@@ -27,24 +31,34 @@ public class Reserva implements Serializable{
      private Long id;
      @Column(nullable = false)
      @Temporal(TemporalType.TIMESTAMP)
+     @NotNull(message = "Data de registro é obrigatório.")
      private Calendar datahora;
      @Column(nullable = false)
      @Temporal(TemporalType.DATE)
+     @NotNull(message = "Data de início é obrigatória.")
+     @FutureOrPresent(message= "Data de início da reserva deve ser atual ou no futuro.")
+     @DateTimeFormat(pattern = "yyyy-MM-dd")
      private Calendar inicio;
      @Column(nullable = false)
      @Temporal(TemporalType.DATE)
+     @NotNull(message = "Data de términno é obrigatória.")
+     @FutureOrPresent(message= "Data de término da reserva deve ser atual ou no futuro.")
+     @DateTimeFormat(pattern = "yyyy-MM-dd")
      private Calendar termino;
      
-     @JsonManagedReference
+  
      @ManyToMany
+     @Size(min = 1, message = "Reserva deve ter no mínimo 1 carro.")
      private List<Carro> carros = new ArrayList<>();
      
-     @JsonManagedReference
+   
      @ManyToOne
      @JoinColumn(nullable = false)
+     @NotNull(message = "Cliente obrigtório.")
      private Cliente cliente;
-     @JsonManagedReference
+   
      @ManyToOne
+     @NotNull(message = "Funcionário obrigatório.")
      private Funcionario funcionario;
 
     public Long getId() {
