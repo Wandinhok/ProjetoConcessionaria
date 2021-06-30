@@ -46,7 +46,7 @@ public class Concessionaria implements Serializable {
      private List<Telefone> telefones;
      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
      @JoinColumn(nullable = false, name = "concessionaria_id")
-     @Size(min = 1, message = "Hotel deve ter no mínimo 1 quarto.")
+     @Size(min = 1, message = "Concessionaria deve ter no mínimo 1 carro.")
      @Valid
      private List<Carro> carros = new ArrayList<>();
      
