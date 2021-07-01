@@ -2,6 +2,7 @@
 package br.edu.iff.projetoconcessionaria.model;
 
 
+
 import br.edu.iff.projetoconcessionaria.annotation.EmailValidation;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -37,7 +37,7 @@ public abstract class Pessoa implements Serializable {
    private String nome;
    @Column(nullable = false, length = 100, unique = true, updatable = false)
    @NotBlank(message = "Email obrigatório.")
-   @EmailValidation(message = "Email inválido.")
+   @EmailValidation(message = "Email inválido")
    private String email;
    @Column(length = 14, nullable = false, unique = true)
    @CPF(message = "CPF inválido.")

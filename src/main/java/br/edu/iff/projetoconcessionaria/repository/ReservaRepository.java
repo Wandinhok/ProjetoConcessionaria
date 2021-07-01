@@ -23,7 +23,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     
     public List<Reserva> findByClienteId(Long funcionarioId, Pageable page);
     
-    public List<Reserva> findByClienteIdAndFuncionarioId(Long Cliente, Long funcionarioId, Pageable page);
+    public List<Reserva> findByClienteIdAndFuncionarioId(Long ClienteId, Long funcionarioId, Pageable page);
     
     @Query("SELECT DISTINCT (r) FROM Reserva r WHERE (r.inicio BETWEEN :inicio AND :termino) OR (r.termino BETWEEN :inicio AND :termino) ")
     public List<Reserva> findByReservasEntreDatas(Calendar inicio, Calendar termino);

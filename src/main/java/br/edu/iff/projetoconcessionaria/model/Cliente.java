@@ -4,13 +4,16 @@ package br.edu.iff.projetoconcessionaria.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cliente extends Pessoa {
@@ -18,11 +21,11 @@ public class Cliente extends Pessoa {
     @Length(max = 200, message = "Documentos devem ter no máximo 200 caracteres.")
     private String documentos; 
     @Column(nullable = false, length = 10)
-    @NotBlank(message="Data de nascimento obrigatória.")
-    private Date dt_nascimento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Calendar dt_nascimento;
     @Column(nullable = false, length = 2)
-    @NotBlank(message="Habilitação obrigatória.")
-    @Length(max = 2, message = "Habilitaçãp deve ter no máximo 2 caracteres")
+    @NotBlank(message = "Habilitação obrigatória")
+    @Length(max = 2, message = "Habilitação deve ter no máximo 2 caracteres")
     private String habilitacao;
     
     @JsonIgnore
@@ -37,11 +40,11 @@ public class Cliente extends Pessoa {
         this.documentos = documentos;
     }
 
-    public Date getDt_nascimento() {
+    public Calendar getDt_nascimento() {
         return dt_nascimento;
     }
 
-    public void setDt_nascimento(Date dt_nascimento) {
+    public void setDt_nascimento(Calendar dt_nascimento) {
         this.dt_nascimento = dt_nascimento;
     }
 
